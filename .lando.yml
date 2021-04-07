@@ -1,0 +1,11 @@
+name: {{ local-devsite-name }}
+recipe: drupal9
+config:
+  webroot: 'web'
+  php: '7.3'
+  via: nginx
+  database: mariadb
+services:
+  appserver:
+    build:
+      - composer install
