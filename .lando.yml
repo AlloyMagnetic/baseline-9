@@ -2,7 +2,7 @@ name: {{ local-devsite-name }}
 recipe: drupal9
 config:
   webroot: 'web'
-  php: '7.3'
+  php: '7.4'
   via: nginx
   database: mariadb
 services:
