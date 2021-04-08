@@ -11,12 +11,55 @@
         {
             "type": "path",
             "url": "upstream-configuration"
+        },
+        {
+            "type": "composer",
+            "url": "https://composer.kilpho.st"
         }
     ],
     "require": {
+        "alloy/alloy_assemblies": "dev-master",
+        "alloy/alloy_blog": "dev-master",
+        "alloy/alloy_compact_menu": "dev-master",
+        "alloy/alloy_file_browser": "dev-master",
+        "alloy/iron": "dev-8.x-1.x",
+        "alloy/notification_bar": "dev-8.x",
+        "alloy/pyrite": "dev-master",
+        "alloy/sitetheme": "dev-1.x",
         "drupal/assembly": "1.x-dev",
         "drupal/beryllium": "1.x-dev",
         "drupal/bootstrap": "^3.23",
+        "drupal/ckeditor_media_embed": "^1.10",
+        "drupal/ckeditor_styles_js": "1.x-dev",
+        "drupal/compose": "1.x-dev",
+        "drupal/config_direct_save": "^1.2",
+        "drupal/config_filter": "^2.2",
+        "drupal/config_ignore": "^2.3",
+        "drupal/entity_browser": "^2.5",
+        "drupal/entity_reference_revisions": "^1.9",
+        "drupal/fences": "^2.0@RC",
+        "drupal/file_browser": "^1.3",
+        "drupal/focal_point": "^1.5",
+        "drupal/honeypot": "^2.0",
+        "drupal/imce": "^2.3",
+        "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/linkit": "5.x-dev",
+        "drupal/mailsystem": "^4.3",
+        "drupal/metatag": "^1.16",
+        "drupal/pathauto": "^1.8",
+        "drupal/pathologic": "^1.0@alpha",
+        "drupal/purge": "^3.0",
+        "drupal/realname": "1.x-dev",
+        "drupal/redirect": "^1.6",
+        "drupal/redis": "^1.5",
+        "drupal/simple_block": "^1.2",
+        "drupal/simple_sitemap": "^3.10",
+        "drupal/swiftmailer": "^2.0",
+        "drupal/token": "^1.9",
+        "drupal/varnish_purge": "^2.1",
+        "drupal/video": "^1.4",
+        "drupal/webform": "^6.0",
+        "drupal/yoast_seo": "^1.7",
         "pantheon-upstreams/upstream-configuration": "*"
     },
     "conflict": {
@@ -49,6 +92,18 @@
                 "[project-root]/.editorconfig": false,
                 "[project-root]/pantheon.upstream.yml": false,
                 "[project-root]/.gitattributes": false
+            }
+        },
+        "patches": {
+            "drupal/core": {
+                "Disabled layout for field layout module": "https://www.drupal.org/files/issues/2020-04-29/core--layout-disabled-by-default-3056712-9.patch"
+            },
+            "drupal/bootstrap": {
+                "Remove overflow style from modal": "https://www.drupal.org/files/issues/2019-05-24/modal-height-3048592-4.patch",
+                "Fix for tabledrag": "https://git.drupalcode.org/project/bootstrap/-/merge_requests/1.diff"
+            },
+            "linkit_widget": {
+                "Drupal 9 support": "https://www.drupal.org/files/issues/2020-08-05/3163447-4.patch"
             }
         }
     },
