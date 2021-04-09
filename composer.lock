@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29d2f78b2913b4aa9d9d76eee80d2cc5",
+    "content-hash": "58b4f302531d8425aa6e89f7353f6cb5",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "git@code.kilpho.st:alloy/alloy-assemblies.git",
-                "reference": "6e4e7921c0c806b7ff3e0d25f3f9af1cda16109d"
+                "reference": "43758f27d8041784f642db18027b742c2ea975c1"
             },
             "type": "drupal-module",
             "license": [
@@ -23,7 +23,7 @@
             "keywords": [
                 "Drupal"
             ],
-            "time": "2021-04-07T14:30:06+00:00"
+            "time": "2021-04-09T19:29:37+00:00"
         },
         {
             "name": "alloy/alloy_blog",
@@ -31,18 +31,18 @@
             "source": {
                 "type": "git",
                 "url": "git@code.kilpho.st:alloy/alloy-blog.git",
-                "reference": "eaed633a1e5140d3e7da4fc82f6e8c9f32fe647d"
+                "reference": "32daa621623041cde8e9db38b9f01d1e4668079a"
             },
             "type": "drupal-module",
             "license": [
-                "Proprietary"
+                "proprietary"
             ],
             "description": "Starter pack for a full featured blog in Drupal",
             "homepage": "https://code.kilpho.st/alloy/alloy-blog",
             "keywords": [
                 "Drupal"
             ],
-            "time": "2020-06-22T17:25:18+00:00"
+            "time": "2021-04-09T15:05:41+00:00"
         },
         {
             "name": "alloy/alloy_compact_menu",
@@ -50,18 +50,18 @@
             "source": {
                 "type": "git",
                 "url": "git@code.kilpho.st:alloy/alloy-compact-menu.git",
-                "reference": "47c0e693599fe3853c986ee14405a4c83aa34497"
+                "reference": "97f2883e1b0c123abaa3146b317e97fd706d06fb"
             },
             "type": "drupal-module",
             "license": [
-                "Proprietary"
+                "proprietary"
             ],
             "description": "Provides a menu link field for compact menus",
             "homepage": "https://code.kilpho.st/alloy/alloy-compact-menu",
             "keywords": [
                 "Drupal"
             ],
-            "time": "2021-04-06T15:48:37+00:00"
+            "time": "2021-04-08T18:05:02+00:00"
         },
         {
             "name": "alloy/alloy_file_browser",
@@ -69,18 +69,18 @@
             "source": {
                 "type": "git",
                 "url": "git@code.kilpho.st:alloy/alloy-file-browser.git",
-                "reference": "278107bbf60c28d2e6b0cbd372c97b3bd247f63f"
+                "reference": "3ca16fd6a93fcc04b203519a6e6c34d80f8e1087"
             },
             "type": "drupal-module",
             "license": [
-                "Proprietary"
+                "proprietary"
             ],
             "description": "Customize the File Browser module for use with Alloy baseline",
             "homepage": "https://code.kilpho.st/alloy/alloy-file-browser",
             "keywords": [
                 "Drupal"
             ],
-            "time": "2021-04-06T20:42:32+00:00"
+            "time": "2021-04-08T18:06:07+00:00"
         },
         {
             "name": "alloy/iron",
@@ -1554,6 +1554,10 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Remove overflow style from modal": "https://www.drupal.org/files/issues/2019-05-24/modal-height-3048592-4.patch",
+                    "Fix for tabledrag": "https://git.drupalcode.org/project/bootstrap/-/merge_requests/1.diff"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2122,6 +2126,9 @@
                         "[web-root]/profiles/README.txt": "assets/scaffold/files/profiles.README.txt",
                         "[web-root]/themes/README.txt": "assets/scaffold/files/themes.README.txt"
                     }
+                },
+                "patches_applied": {
+                    "Disabled layout for field layout module": "https://www.drupal.org/files/issues/2020-04-29/core--layout-disabled-by-default-3056712-9.patch"
                 }
             },
             "autoload": {
