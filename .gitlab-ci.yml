@@ -1,0 +1,33 @@
+image: webdevops/php-nginx:7.4
+services: []
+
+variables:
+  COMPOSER_VERSION: 1
+
+before_script:
+  - ln -s `pwd` /srv/www
+  - eval $(ssh-agent -s)
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
+
+stages:
+  - test
+  - deploy
+
+deploy_pantheon:
+  stage: deploy
+  environment: pantheon
+  variables:
+    PANTHEON_UUID: {{ REPLACE_WITH_PANTHEON_UUID }}
+  script:
+    - printf "[Date]\ndate.timezone = America/New_York\n" >> /usr/local/etc/php/php.ini
+    - echo "$REPO_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - echo "$PANTHEON_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - git remote add pantheon ssh://codeserver.dev.${PANTHEON_UUID}@codeserver.dev.${PANTHEON_UUID}.drush.in:2222/~/repository.git
+    - git fetch pantheon
+    - git checkout -b master
+    - git push pantheon master
+  only:
+    - master
+
