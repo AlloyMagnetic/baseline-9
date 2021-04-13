@@ -1966,7 +1966,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/assembly.git",
-                "reference": "1e23724340d06e17e948a2515d99a3da19adfc4a"
+                "reference": "dddb71c520ca03580663dcc9e72b30c04fffa4e8"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -1980,7 +1980,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.x-dev",
-                    "datestamp": "1617803431",
+                    "datestamp": "1617804789",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -2014,7 +2014,7 @@
                 "source": "http://cgit.drupalcode.org/assembly",
                 "issues": "https://www.drupal.org/project/issues/assembly"
             },
-            "time": "2021-04-07T14:12:43+00:00"
+            "time": "2021-04-13T20:57:11+00:00"
         },
         {
             "name": "drupal/beryllium",
