@@ -1,4 +1,13 @@
-# Composer-enabled Drupal template
+# Alloy's Composer-enabled Drupal template
+
+This is Alloy's custom Drupal 9 upstream.
+
+When there is a Drupal update, you can merge the original upstream into this
+to make the update available to downstream sites.
+
+Original Upstream: https://github.com/pantheon-upstreams/drupal-project
+
+# Original README:
 
 This is Pantheon's recommended starting point for forking new Drupal upstreams
 that work with the Platform's Integrated Composer build process. It is also the
