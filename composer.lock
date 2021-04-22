@@ -4,26 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2283d4f6425a7e452bae58adfd84deed",
+    "content-hash": "59baf791354638a59a0b3eee2d2f64a2",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
-            "version": "dev-master",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/alloy-assemblies.git",
-                "reference": "43758f27d8041784f642db18027b742c2ea975c1"
+                "url": "https://github.com/AlloyMagnetic/alloy_assemblies.git",
+                "reference": "a4c6b8d28cc2f68a172216d2ec7a70ea696e6a98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/alloy_assemblies/zipball/a4c6b8d28cc2f68a172216d2ec7a70ea696e6a98",
+                "reference": "a4c6b8d28cc2f68a172216d2ec7a70ea696e6a98",
+                "shasum": ""
             },
             "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Basic starter assemblies",
             "homepage": "https://code.kilpho.st/alloy/alloy-assemblies",
             "keywords": [
-                "Drupal"
+                "drupal"
             ],
-            "time": "2021-04-09T19:29:37+00:00"
+            "time": "2021-04-22T15:00:38+00:00"
         },
         {
             "name": "alloy/alloy_blog",
@@ -31,7 +38,7 @@
             "source": {
                 "type": "git",
                 "url": "git@code.kilpho.st:alloy/alloy-blog.git",
-                "reference": "32daa621623041cde8e9db38b9f01d1e4668079a"
+                "reference": "9d53f743eda78d0b107ffadf0d06244069198903"
             },
             "type": "drupal-module",
             "license": [
@@ -42,7 +49,7 @@
             "keywords": [
                 "Drupal"
             ],
-            "time": "2021-04-09T15:05:41+00:00"
+            "time": "2021-04-16T16:03:01+00:00"
         },
         {
             "name": "alloy/alloy_compact_menu",
@@ -88,12 +95,12 @@
             "source": {
                 "type": "git",
                 "url": "git@code.kilpho.st:alloy/iron.git",
-                "reference": "57f619c6ab60af3f6a2f57201269e26c0b7a77b6"
+                "reference": "7dbf17c0f5abae9daadf5bc7b4027c3d6a843462"
             },
             "type": "drupal-profile",
             "description": "Install profile for Alloy's baseline website.",
             "homepage": "https://www.alloymagnetic.com",
-            "time": "2021-04-07T14:10:18+00:00"
+            "time": "2021-04-22T16:12:52+00:00"
         },
         {
             "name": "alloy/notification_bar",
@@ -9624,7 +9631,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "alloy/alloy_assemblies": 20,
         "alloy/alloy_blog": 20,
         "alloy/alloy_compact_menu": 20,
         "alloy/alloy_file_browser": 20,
