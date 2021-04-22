@@ -62,7 +62,8 @@
         "drupal/webform": "^6.0",
         "drupal/yoast_seo": "^1.7",
         "kint-php/kint": "^3.3",
-        "pantheon-upstreams/upstream-configuration": "*"
+        "pantheon-upstreams/upstream-configuration": "*",
+        "drush/drush": "^10"
     },
     "conflict": {
             "drupal/drupal": "*"
@@ -110,7 +111,6 @@
         }
     },
     "config": {
-        "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
         "platform": {
