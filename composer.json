@@ -35,6 +35,7 @@
         "drupal/config_direct_save": "^1.2",
         "drupal/config_filter": "^2.2",
         "drupal/config_ignore": "^2.3",
+        "drupal/core-recommended": "9.1.7",
         "drupal/devel": "^4.1",
         "drupal/entity_browser": "^2.5",
         "drupal/entity_reference_revisions": "^1.9",
@@ -61,9 +62,9 @@
         "drupal/video": "^1.4",
         "drupal/webform": "^6.0",
         "drupal/yoast_seo": "^1.7",
+        "drush/drush": "^10",
         "kint-php/kint": "^3.3",
-        "pantheon-upstreams/upstream-configuration": "*",
-        "drush/drush": "^10"
+        "pantheon-upstreams/upstream-configuration": "*"
     },
     "conflict": {
             "drupal/drupal": "*"
