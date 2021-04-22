@@ -4,33 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59baf791354638a59a0b3eee2d2f64a2",
+    "content-hash": "81e39298e06c7139bafd4b9f81a78a47",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
-            "version": "2.x-dev",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/AlloyMagnetic/alloy_assemblies.git",
-                "reference": "a4c6b8d28cc2f68a172216d2ec7a70ea696e6a98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AlloyMagnetic/alloy_assemblies/zipball/a4c6b8d28cc2f68a172216d2ec7a70ea696e6a98",
-                "reference": "a4c6b8d28cc2f68a172216d2ec7a70ea696e6a98",
-                "shasum": ""
+                "url": "git@code.kilpho.st:alloy/alloy-assemblies.git",
+                "reference": "2cc0d5ab1af45ee5ab44ebd9996a0feb0a72adc8"
             },
             "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Basic starter assemblies",
             "homepage": "https://code.kilpho.st/alloy/alloy-assemblies",
             "keywords": [
-                "drupal"
-            ],
-            "time": "2021-04-22T15:00:38+00:00"
+                "Drupal"
+            ]
         },
         {
             "name": "alloy/alloy_blog",
