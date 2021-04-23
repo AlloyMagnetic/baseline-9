@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae4986d2063e9dd758c3d06927186eb7",
+    "content-hash": "1248f4bf8fdd4224a34af0d815e2793a",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
@@ -91,16 +91,23 @@
         },
         {
             "name": "alloy/iron",
-            "version": "dev-8.x-1.x",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/iron.git",
-                "reference": "e9dd8fd25decc39dd1bea371a2b11b58b2b6a39e"
+                "url": "https://github.com/AlloyMagnetic/iron.git",
+                "reference": "f19778912c9f0f3344862159dfcbf49b68f87e55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/iron/zipball/f19778912c9f0f3344862159dfcbf49b68f87e55",
+                "reference": "f19778912c9f0f3344862159dfcbf49b68f87e55",
+                "shasum": ""
             },
             "type": "drupal-profile",
+            "notification-url": "https://packagist.org/downloads/",
             "description": "Install profile for Alloy's baseline website.",
             "homepage": "https://www.alloymagnetic.com",
-            "time": "2021-04-22T20:05:56+00:00"
+            "time": "2021-04-22T20:57:03+00:00"
         },
         {
             "name": "alloy/notification_bar",
@@ -9633,7 +9640,6 @@
         "alloy/alloy_blog": 20,
         "alloy/alloy_compact_menu": 20,
         "alloy/alloy_file_browser": 20,
-        "alloy/iron": 20,
         "alloy/notification_bar": 20,
         "alloy/pyrite": 20,
         "alloy/sitetheme": 20,
