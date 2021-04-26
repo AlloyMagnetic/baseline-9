@@ -11,7 +11,7 @@
             "version": "2.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/AlloyMagnetic/alloy_assemblies.git",
+                "url": "git@code.kilpho.st:alloy/alloy-assemblies.git",
                 "reference": "3787ec8eee4cf6097f53167fe5cc79dbe1ce3090"
             },
             "dist": {
@@ -38,7 +38,7 @@
             "source": {
                 "type": "git",
                 "url": "git@code.kilpho.st:alloy/alloy-blog.git",
-                "reference": "9d53f743eda78d0b107ffadf0d06244069198903"
+                "reference": "f39394673b1832cf929abc2109bf111117f043dd"
             },
             "type": "drupal-module",
             "license": [
@@ -49,7 +49,7 @@
             "keywords": [
                 "Drupal"
             ],
-            "time": "2021-04-16T16:03:01+00:00"
+            "time": "2021-04-26T14:50:46+00:00"
         },
         {
             "name": "alloy/alloy_compact_menu",
@@ -94,7 +94,7 @@
             "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/AlloyMagnetic/iron.git",
+                "url": "git@code.kilpho.st:alloy/iron.git",
                 "reference": "f19778912c9f0f3344862159dfcbf49b68f87e55"
             },
             "dist": {
