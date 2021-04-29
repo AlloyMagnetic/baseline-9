@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1248f4bf8fdd4224a34af0d815e2793a",
+    "content-hash": "d44f8d1a87f2615fbaa7228e3261506c",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
@@ -14,23 +14,15 @@
                 "url": "git@code.kilpho.st:alloy/alloy-assemblies.git",
                 "reference": "3787ec8eee4cf6097f53167fe5cc79dbe1ce3090"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AlloyMagnetic/alloy_assemblies/zipball/3787ec8eee4cf6097f53167fe5cc79dbe1ce3090",
-                "reference": "3787ec8eee4cf6097f53167fe5cc79dbe1ce3090",
-                "shasum": ""
-            },
             "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Basic starter assemblies",
             "homepage": "https://code.kilpho.st/alloy/alloy-assemblies",
             "keywords": [
-                "drupal"
-            ],
-            "time": "2021-04-22T20:34:08+00:00"
+                "Drupal"
+            ]
         },
         {
             "name": "alloy/alloy_blog",
@@ -97,17 +89,9 @@
                 "url": "git@code.kilpho.st:alloy/iron.git",
                 "reference": "f19778912c9f0f3344862159dfcbf49b68f87e55"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AlloyMagnetic/iron/zipball/f19778912c9f0f3344862159dfcbf49b68f87e55",
-                "reference": "f19778912c9f0f3344862159dfcbf49b68f87e55",
-                "shasum": ""
-            },
             "type": "drupal-profile",
-            "notification-url": "https://packagist.org/downloads/",
             "description": "Install profile for Alloy's baseline website.",
-            "homepage": "https://www.alloymagnetic.com",
-            "time": "2021-04-22T20:57:03+00:00"
+            "homepage": "https://www.alloymagnetic.com"
         },
         {
             "name": "alloy/notification_bar",
@@ -3070,6 +3054,58 @@
             }
         },
         {
+            "name": "drupal/devel_kint_extras",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/devel_kint_extras.git",
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/devel_kint_extras-1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": "286b5183552cc673fb96de7e3d943a3cfd82ec00"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/devel": "^4.0",
+                "kint-php/kint": "^3.3"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0",
+                    "datestamp": "1597133801",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Chojnacki",
+                    "homepage": "https://www.drupal.org/u/janchojnacki"
+                },
+                {
+                    "name": "Other contributors",
+                    "homepage": "https://www.drupal.org/node/3164492/committers"
+                }
+            ],
+            "description": "Shows methods and statics available for an object when using Kint with Devel",
+            "homepage": "https://www.drupal.org/project/devel_kint_extras",
+            "support": {
+                "source": "http://git.drupal.org/project/devel_kint_extras.git",
+                "issues": "https://www.drupal.org/project/issues/devel_kint_extras",
+                "chat": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
             "name": "drupal/dropzonejs",
             "version": "2.5.0",
             "source": {
@@ -4481,7 +4517,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-3.10",
-                    "datestamp": "1617833756",
+                    "datestamp": "1617840662",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
