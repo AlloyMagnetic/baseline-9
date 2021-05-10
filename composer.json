@@ -11,10 +11,6 @@
         {
             "type": "path",
             "url": "upstream-configuration"
-        },
-        {
-            "type": "composer",
-            "url": "https://composer.kilpho.st"
         }
     ],
     "require": {
