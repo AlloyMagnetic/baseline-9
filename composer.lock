@@ -4,52 +4,73 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e95ed476f133d9b1530e8361ddab64b0",
+    "content-hash": "97862f1e16323d688dab341f11ab1cae",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
             "version": "2.1.1",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/alloy-assemblies.git",
+                "url": "https://github.com/AlloyMagnetic/alloy_assemblies.git",
                 "reference": "3787ec8eee4cf6097f53167fe5cc79dbe1ce3090"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/alloy_assemblies/zipball/3787ec8eee4cf6097f53167fe5cc79dbe1ce3090",
+                "reference": "3787ec8eee4cf6097f53167fe5cc79dbe1ce3090",
+                "shasum": ""
+            },
             "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Basic starter assemblies",
             "homepage": "https://code.kilpho.st/alloy/alloy-assemblies",
             "keywords": [
-                "Drupal"
-            ]
+                "drupal"
+            ],
+            "time": "2021-04-22T20:34:08+00:00"
         },
         {
             "name": "alloy/alloy_blog",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/alloy-blog.git",
-                "reference": "f39394673b1832cf929abc2109bf111117f043dd"
+                "url": "https://github.com/AlloyMagnetic/alloy_blog.git",
+                "reference": "978d148f1d757270201bbeb8fb863938c0a1da31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/alloy_blog/zipball/978d148f1d757270201bbeb8fb863938c0a1da31",
+                "reference": "978d148f1d757270201bbeb8fb863938c0a1da31",
+                "shasum": ""
             },
             "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Starter pack for a full featured blog in Drupal",
             "homepage": "https://code.kilpho.st/alloy/alloy-blog",
             "keywords": [
-                "Drupal"
+                "drupal"
             ],
-            "time": "2021-04-26T14:50:46+00:00"
+            "time": "2021-05-06T15:24:53+00:00"
         },
         {
             "name": "alloy/alloy_compact_menu",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/alloy-compact-menu.git",
+                "url": "https://github.com/AlloyMagnetic/compact_menu.git",
                 "reference": "97f2883e1b0c123abaa3146b317e97fd706d06fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/compact_menu/zipball/97f2883e1b0c123abaa3146b317e97fd706d06fb",
+                "reference": "97f2883e1b0c123abaa3146b317e97fd706d06fb",
+                "shasum": ""
             },
             "type": "drupal-module",
             "license": [
@@ -67,8 +88,14 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/alloy-file-browser.git",
+                "url": "https://github.com/AlloyMagnetic/alloy_file_browser.git",
                 "reference": "3ca16fd6a93fcc04b203519a6e6c34d80f8e1087"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/alloy_file_browser/zipball/3ca16fd6a93fcc04b203519a6e6c34d80f8e1087",
+                "reference": "3ca16fd6a93fcc04b203519a6e6c34d80f8e1087",
+                "shasum": ""
             },
             "type": "drupal-module",
             "license": [
@@ -86,8 +113,14 @@
             "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/iron.git",
+                "url": "https://github.com/AlloyMagnetic/iron.git",
                 "reference": "f19778912c9f0f3344862159dfcbf49b68f87e55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/iron/zipball/f19778912c9f0f3344862159dfcbf49b68f87e55",
+                "reference": "f19778912c9f0f3344862159dfcbf49b68f87e55",
+                "shasum": ""
             },
             "type": "drupal-profile",
             "description": "Install profile for Alloy's baseline website.",
@@ -95,20 +128,27 @@
         },
         {
             "name": "alloy/notification_bar",
-            "version": "dev-8.x",
+            "version": "8.x-dev",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/notification_bar.git",
+                "url": "https://github.com/AlloyMagnetic/notification_bar.git",
                 "reference": "05dc211a54f390863c8f22d1b2d052deda141e99"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/notification_bar/zipball/05dc211a54f390863c8f22d1b2d052deda141e99",
+                "reference": "05dc211a54f390863c8f22d1b2d052deda141e99",
+                "shasum": ""
+            },
             "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
             "description": "Configurable notification bar",
             "homepage": "https://code.kilpho.st/alloy/notification_bar",
             "keywords": [
-                "Drupal"
+                "drupal"
             ],
             "time": "2021-04-07T16:31:05+00:00"
         },
@@ -117,8 +157,14 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/pyrite.git",
+                "url": "https://github.com/AlloyMagnetic/pyrite.git",
                 "reference": "dc0c6d467f8090716f6847e2274a0dcfafe21d40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/pyrite/zipball/dc0c6d467f8090716f6847e2274a0dcfafe21d40",
+                "reference": "dc0c6d467f8090716f6847e2274a0dcfafe21d40",
+                "shasum": ""
             },
             "type": "drupal-module",
             "license": [
@@ -133,13 +179,20 @@
         },
         {
             "name": "alloy/sitetheme",
-            "version": "dev-1.x",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "git@code.kilpho.st:alloy/sitetheme.git",
+                "url": "https://github.com/AlloyMagnetic/sitetheme.git",
                 "reference": "c1527273af0bf441d37e1caddb7c32860ffe102e"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlloyMagnetic/sitetheme/zipball/c1527273af0bf441d37e1caddb7c32860ffe102e",
+                "reference": "c1527273af0bf441d37e1caddb7c32860ffe102e",
+                "shasum": ""
+            },
             "type": "drupal-theme",
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Matt Moen",
