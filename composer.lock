@@ -2341,7 +2341,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/compose.git",
-                "reference": "0499a66e38f4c753a9889bb5e26499c5e00cb294"
+                "reference": "cb918594856a15b84fc23fd031f66ba1a79bf1d6"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -2354,7 +2354,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.x-dev",
-                    "datestamp": "1617803493",
+                    "datestamp": "1630694900",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
