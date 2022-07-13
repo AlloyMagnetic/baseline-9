@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a4c8e1f5fb8e43d9a76041085d1cd88",
+    "content-hash": "222783bebe092a2975593e73d9975975",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
@@ -110,23 +110,23 @@
         },
         {
             "name": "alloy/iron",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AlloyMagnetic/iron.git",
-                "reference": "48dbf8d569ad1103588b357dbdde666137545cbd"
+                "reference": "5699a4f29d5c3052a22b76725d244c1efa81aed1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AlloyMagnetic/iron/zipball/48dbf8d569ad1103588b357dbdde666137545cbd",
-                "reference": "48dbf8d569ad1103588b357dbdde666137545cbd",
+                "url": "https://api.github.com/repos/AlloyMagnetic/iron/zipball/5699a4f29d5c3052a22b76725d244c1efa81aed1",
+                "reference": "5699a4f29d5c3052a22b76725d244c1efa81aed1",
                 "shasum": ""
             },
             "type": "drupal-profile",
             "notification-url": "https://packagist.org/downloads/",
             "description": "Install profile for Alloy's baseline website.",
             "homepage": "https://www.alloymagnetic.com",
-            "time": "2021-05-12T15:02:07+00:00"
+            "time": "2022-07-13T14:59:04+00:00"
         },
         {
             "name": "alloy/notification_bar",
@@ -2160,7 +2160,8 @@
             "homepage": "https://www.drupal.org/project/beryllium",
             "support": {
                 "source": "https://git.drupalcode.org/project/beryllium"
-            }
+            },
+            "time": "2021-09-07T17:19:03+00:00"
         },
         {
             "name": "drupal/bootstrap",
@@ -2383,7 +2384,8 @@
             ],
             "support": {
                 "source": "https://git.drupalcode.org/project/compose"
-            }
+            },
+            "time": "2021-09-13T19:17:54+00:00"
         },
         {
             "name": "drupal/config_direct_save",
@@ -2766,6 +2768,9 @@
                         "[web-root]/profiles/README.txt": "assets/scaffold/files/profiles.README.txt",
                         "[web-root]/themes/README.txt": "assets/scaffold/files/themes.README.txt"
                     }
+                },
+                "patches_applied": {
+                    "Disabled layout for field layout module": "https://www.drupal.org/files/issues/2020-04-29/core--layout-disabled-by-default-3056712-9.patch"
                 }
             },
             "autoload": {
@@ -4887,7 +4892,8 @@
                 "source": "https://cgit.drupalcode.org/simple_sitemap",
                 "issues": "https://drupal.org/project/issues/simple_sitemap",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
+            },
+            "time": "2021-05-25T00:15:18+00:00"
         },
         {
             "name": "drupal/symfony_mailer",
@@ -6722,10 +6728,7 @@
                 "php": ">=7.3",
                 "zaporylie/composer-drupal-optimizations": "^1.2"
             },
-            "type": "project",
-            "transport-options": {
-                "relative": true
-            }
+            "type": "project"
         },
         {
             "name": "pear/archive_tar",
@@ -10479,6 +10482,7 @@
                 }
             ],
             "description": "A robust cross-platform utility for normalizing, comparing and modifying file paths.",
+            "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
         },
         {
@@ -10557,5 +10561,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "1.1.0"
 }

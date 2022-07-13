@@ -18,7 +18,7 @@
         "alloy/alloy_blog": "dev-master",
         "alloy/alloy_compact_menu": "dev-master",
         "alloy/alloy_file_browser": "dev-master",
-        "alloy/iron": "2.0.1",
+        "alloy/iron": "2.0.2",
         "alloy/notification_bar": "8.x-dev",
         "alloy/pyrite": "dev-master",
         "alloy/sitetheme": "1.x-dev",
