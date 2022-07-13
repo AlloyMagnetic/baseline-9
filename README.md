@@ -5,7 +5,7 @@ This is Alloy's custom Drupal 9 upstream.
 When there is a Drupal update, run the following command:
 composer require --update-with-dependencies drupal/core-recommended:9.?.? (use the actual version numbers)
 
-Original Upstream: https://github.com/pantheon-upstreams/drupal-project
+Original Upstream: https://github.com/pantheon-upstreams/drupal-composer-managed
 
 # Original README:
 
