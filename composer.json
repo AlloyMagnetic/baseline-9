@@ -24,7 +24,7 @@
         "alloy/sitetheme": "1.x-dev",
         "drupal/assembly": "1.x-dev",
         "drupal/beryllium": "1.x-dev",
-        "drupal/bootstrap": "^3.23",
+        "drupal/bootstrap": "^3.25",
         "drupal/ckeditor_media_embed": "^1.10",
         "drupal/ckeditor_styles_js": "1.x-dev",
         "drupal/compose": "1.x-dev",
@@ -104,8 +104,7 @@
                 "Disabled layout for field layout module": "https://www.drupal.org/files/issues/2020-04-29/core--layout-disabled-by-default-3056712-9.patch"
             },
             "drupal/bootstrap": {
-                "Remove overflow style from modal": "https://www.drupal.org/files/issues/2019-05-24/modal-height-3048592-4.patch",
-                "Fix for tabledrag": "https://git.drupalcode.org/project/bootstrap/-/merge_requests/1.diff"
+                "Remove overflow style from modal": "https://www.drupal.org/files/issues/2019-05-24/modal-height-3048592-4.patch"
             },
             "linkit_widget": {
                 "Drupal 9 support": "https://www.drupal.org/files/issues/2020-08-05/3163447-4.patch"
