@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4465494f59fb839f07044ed700b1125",
+    "content-hash": "aca2a983abe22ff64d4c348c621391e1",
     "packages": [
         {
             "name": "alloy/alloy_assemblies",
