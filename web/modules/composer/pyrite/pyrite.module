@@ -1,0 +1,224 @@
+<?php
+
+use Drupal\pyrite\PyriteRules;
+use Drupal\webform\Entity\Webform;
+use Drupal\Core\Form\FormStateInterface;
+
+function pyrite_webform_third_party_settings_form_alter(&$form, FormStateInterface $form_state) {
+  $webform = $form_state->getFormObject()->getEntity();
+  $elements = $webform->getElementsInitializedAndFlattened();
+
+  $options = [];
+  foreach ($elements as $element) {
+    $options[rawurlencode($element['#webform_key'])] = $element['#title'];
+  }
+
+  $form['third_party_settings']['pyrite'] = [
+    '#type' => 'details',
+    '#title' => t('Pyrite'),
+    '#open' => TRUE,
+    '#description' => t('Mitigate SPAM webform submissions using various methods.'),
+  ];
+
+  $form['third_party_settings']['pyrite']['rules'] = [
+    '#type' => 'checkboxes',
+    '#title' => 'Rejection criteria',
+    '#options' => [
+      'name_match' => 'Name: value repeated',
+      'invalid_capitals' => 'Name: invalid capital letters',
+      'russian_email' => 'Email: domain ends in .ru',
+      'phone_zero' => 'Phone: starts with 0',
+      'prohibited_words' => 'Text: contains prohibited words',
+      'local_domain' => 'Text: contains the site\'s URL',
+      'multiple_urls' => 'Text: contains multiple URLs',
+      'bitly' => 'Text: contains any bit.ly or tinyurl.com URL',
+      'cyrillic' => 'Text: contains Cyrillic characters',
+    ],
+    '#default_value' => $webform->getThirdPartySetting('pyrite', 'rules')
+  ];
+
+  $form['third_party_settings']['pyrite']['name_fields'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Name fields'),
+    '#options' => $options,
+    '#default_value' => $webform->getThirdPartySetting('pyrite', 'name_fields'),
+    '#description' => t('Select the fields that should be checked for name criteria.'),
+  );
+
+  $form['third_party_settings']['pyrite']['text_fields'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Text fields'),
+    '#options' => $options,
+    '#default_value' => $webform->getThirdPartySetting('pyrite', 'text_fields'),
+    '#description' => t('Select the fields to be checked for text criteria.'),
+  );
+}
+
+function pyrite_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  
+  if (!$form_state->getFormObject() instanceof \Drupal\Core\Entity\EntityFormInterface) {
+    return;
+  }
+
+  if ($form_state->getFormObject()->getEntity()->getEntityTypeId() != 'webform_submission') {
+    return;
+  }
+
+  $webform = $form_state->getFormObject()->getEntity()->getWebform();
+  if (!$webform) {
+    return;
+  }
+
+  $form['#validate'][] = 'pyrite_webform_validation';
+
+}
+
+function pyrite_webform_validation($form, &$form_state) {
+  $debug = false;
+
+  $webform = $form_state->getFormObject()->getEntity()->getWebform();
+
+  $rules = $webform->getThirdPartySetting('pyrite', 'rules');
+
+  foreach($rules as $rule => $value) {
+    if ($value && call_user_func('pyrite_reject_' . $value, $webform, $form_state, $debug)) {
+      return false;
+    }
+  }
+
+  if ($debug) {
+    $form_state->setErrorByName('form', t('No violations found.'));
+  }
+}
+
+function pyrite_name_field_values(Webform $webform, FormStateInterface $form_state) {
+  $values = [];
+  $fields = $webform->getThirdPartySetting('pyrite', 'name_fields');
+  foreach ($fields as $key => $field) {
+    if ($field) {
+      $values[] = $form_state->getValue($field);
+    }
+  }
+  return $values;
+}
+
+function pyrite_phone_field_values(Webform $webform, FormStateInterface $form_state) {
+  $values = [];
+  foreach ($webform->getElementsInitialized() as $element) {
+    if ($element['#type'] == 'tel') {
+      $values[] = $form_state->getValue($element['#webform_key']);
+    }
+  }
+  return $values;
+}
+
+function pyrite_email_field_values(Webform $webform, FormStateInterface $form_state) {
+  $values = [];
+  foreach ($webform->getElementsInitialized() as $element) {
+    if ($element['#type'] == 'email') {
+      $values[] = $form_state->getValue($element['#webform_key']);
+    }
+  }
+  return $values;
+}
+
+function pyrite_text_field_values(Webform $webform, FormStateInterface $form_state) {
+  $values = [];
+  $fields = $webform->getThirdPartySetting('pyrite', 'text_fields');
+  foreach ($fields as $key => $field) {
+    if ($field) {
+      $values[] = $form_state->getValue($field);
+    }
+  }
+  return $values;
+}
+
+function pyrite_reject_name_match(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::nameMatch(pyrite_name_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Name match violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Name match violation: @value / @value2", ['@value' => $offense[0], '@value2' => $offense[1]]);
+    return true;
+  }
+}
+
+function pyrite_reject_prohibited_words(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::prohibitedWords(pyrite_text_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Prohibited words violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Prohibited words violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}
+
+function pyrite_reject_russian_email(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::russianEmail(pyrite_email_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Prohibited email violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Email domain violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}
+
+function pyrite_reject_phone_zero(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::phoneZero(pyrite_phone_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Prohibited phone violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Phone violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}
+
+function pyrite_reject_multiple_urls(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::multipleUrls(pyrite_text_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Multiple URLs violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Multiple URLs violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}
+
+function pyrite_reject_bitly(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::bitly(pyrite_text_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Bitly violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Bitly violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}
+
+function pyrite_reject_local_domain(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::localDomain(pyrite_text_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Local domain violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Local domain violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}
+
+function pyrite_reject_cyrillic(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::cyrillic(pyrite_text_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Cyrillic violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Cyrillic violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}
+
+function pyrite_reject_invalid_capitals(Webform $webform, FormStateInterface $form_state, Bool $debug) {
+  if ($offense = PyriteRules::invalidCapitals(pyrite_name_field_values($webform, $form_state))) {
+    $error = 'There was a problem with your submission.';
+    $error .= $debug ? " Invalid capitals violation." : "";
+    $form_state->setErrorByName('form', t($error));
+    \Drupal::logger('pyrite')->notice("Invalid capitals violation: @value", ['@value' => $offense]);
+    return true;
+  }
+}

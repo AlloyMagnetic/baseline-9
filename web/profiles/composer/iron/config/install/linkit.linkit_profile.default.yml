@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.linkit_result_thumbnail
+  module:
+    - file
+    - image
+    - node
+    - taxonomy
+id: default
+label: Default
+description: ''
+matchers:
+  92919da8-d2c8-4341-9acf-42e7edd5e6c0:
+    uuid: 92919da8-d2c8-4341-9acf-42e7edd5e6c0
+    id: 'entity:node'
+    weight: 0
+    settings:
+      result_description: ''
+      bundles: {  }
+      group_by_bundle: true
+      include_unpublished: false
+      metadata: ''
+      substitution_type: canonical
+  c3325be1-92e0-4230-8db5-e4800e7c6281:
+    uuid: c3325be1-92e0-4230-8db5-e4800e7c6281
+    id: 'entity:taxonomy_term'
+    weight: 0
+    settings:
+      result_description: ''
+      bundles: {  }
+      group_by_bundle: false
+      metadata: ''
+      substitution_type: canonical
+  10941c30-de6d-45aa-b78a-a5894c0f67ed:
+    uuid: 10941c30-de6d-45aa-b78a-a5894c0f67ed
+    id: 'entity:file'
+    weight: 0
+    settings:
+      result_description: ''
+      bundles: null
+      group_by_bundle: null
+      images:
+        show_dimensions: true
+        show_thumbnail: true
+        thumbnail_image_style: linkit_result_thumbnail
+      file_extensions: ''
+      file_status: 1
+      substitution_type: file
+      metadata: ''

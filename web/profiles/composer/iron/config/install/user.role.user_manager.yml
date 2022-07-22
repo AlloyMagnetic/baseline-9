@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies: {  }
+id: user_manager
+label: 'User Manager'
+weight: 4
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer permissions'
+  - 'administer users'
+  - 'cancel account'
+  - 'change own username'
+  - 'select account cancellation method'
+  - 'view the administration theme'

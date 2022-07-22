@@ -1,0 +1,6 @@
+{
+  "name": "alloy/iron",
+  "description": "Install profile for Alloy's baseline website.",
+  "type": "drupal-profile",
+  "homepage": "https://www.alloymagnetic.com"
+}

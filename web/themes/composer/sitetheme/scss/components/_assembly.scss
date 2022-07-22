@@ -1,0 +1,61 @@
+.assembly {
+  @include responsive(margin-top, $mobile-space, $tablet-space, $desktop-space);
+  @include responsive(margin-bottom, $mobile-space, $tablet-space, $desktop-space);
+
+  &.vs-no-space-before {
+    margin-top: 0;
+  }
+
+  &.vs-no-space-after {
+    margin-bottom: 0;
+    & + .assembly {
+      margin-top: 0;
+    }
+  }
+
+  &.vs-border-top {
+    border-top: 1px solid #A4a7a9;    
+    @include responsive(padding-top, $mobile-space, $tablet-space, $desktop-space);
+  }
+
+  &.vs-border-bottom {
+    border-bottom: 1px solid #A4a7a9;    
+    @include responsive(padding-bottom, $mobile-space, $tablet-space, $desktop-space);
+  }
+
+  &.vs-title-adjacent {
+    @include responsive(margin-top, -40px !important, -85px !important);
+  }
+
+  &.vs-make-narrow {
+    .container {
+      @include desktop {
+        max-width: 800px + $grid-gutter-width;
+        width: 100%;
+      }
+    }
+  }
+
+  $colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "tertiary": $tertiary,
+    "gray": #F7F7F7
+  );
+
+  @each $color, $value in $colors {
+    &.vs-bg-#{$color},
+    &.vs-bg-#{$color}-compact {
+      background-color: $value;
+    }
+    &.vs-bg-#{$color} {
+      @include responsive(padding-top, $mobile-space, $tablet-space, $desktop-space);
+      @include responsive(padding-bottom, $mobile-space, $tablet-space, $desktop-space);
+    }
+  }
+
+  .section-title {
+    margin-top: 0;
+  }
+}
+

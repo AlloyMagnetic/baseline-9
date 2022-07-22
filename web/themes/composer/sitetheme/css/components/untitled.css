@@ -1,0 +1,9 @@
+.assembly-type-logos .section-title {
+  text-align: center; }
+  .assembly-type-logos .section-title:before {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #efefef; }
+
+/*# sourceMappingURL=untitled.css.map */

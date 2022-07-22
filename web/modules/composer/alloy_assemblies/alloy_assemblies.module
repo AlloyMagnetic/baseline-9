@@ -1,0 +1,290 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\crop\Entity\Crop;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\Core\Render\Element;
+use Drupal\image\Entity\ImageStyle;
+use \Drupal\Component\Utility\Random;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+
+/**
+ * @file
+ * Contains alloy_assemblies.module.
+ */
+
+function alloy_assemblies_preprocess_assembly(&$variables) {
+  $assembly = $variables['elements']['#assembly'];
+  $variables['#attached']['library'][] = 'alloy_assemblies/core';
+
+  $variables['attributes']->addClass($variables['elements']['#view_mode']);
+
+  $type = $assembly->bundle();
+
+  if ($assembly->hasField('field_show_page_title')) {
+    $variables['title_element'] = 'h2';
+    if ($assembly->field_show_page_title->value) {
+      $variables['title_element'] = 'h1';
+    }
+  }
+
+  if ($assembly->hasField('field_spacing')) {
+    $spacing_values = $assembly->get('field_spacing')->getValue();
+    foreach($spacing_values as $spacing) {
+      $variables['attributes']->addClass($spacing);
+    }
+  }
+
+  if ($assembly->hasField('field_background_color')) {
+    $color_value = $assembly->get('field_background_color')->value;
+    if ($color_value) {
+      $variables['attributes']->addClass('has-background');
+      $variables['attributes']->setAttribute('style', 'background-color: #' . $color_value);
+    }
+  }
+
+  if ($type == 'image_billboard') {
+    if ($assembly->hasField('field_background_image')) {
+      $media_value = $assembly->get('field_background_image')->getValue();
+      if ($media_value) {
+        $media = Media::load($media_value[0]['target_id']);
+        $image_value = $media->get('field_media_image')->getValue();
+        $variables['focal_point'] = FALSE;
+        $variables['focal_point_x'] = 0;
+        $variables['focal_point_y'] = 0;
+        if ($image_value) {
+          $file_id = $image_value[0]['target_id'];
+          $focal_point = alloy_assemblies_get_focal_point($assembly, $file_id);
+          $uri = File::load($file_id)->getFileUri();
+          $variables['background_image_url'] = ImageStyle::load('billboard')->buildUrl($uri);
+          $variables['attributes']->addClass('has-background');
+  
+          $focal_point = alloy_assemblies_get_focal_point($assembly, $file_id);
+          $variables['focal_point'] = $focal_point;
+          $x = 0;
+          $y = 0;
+          if (isset($focal_point['x']) && isset($focal_point['y'])) {
+            $x = $focal_point['x'];
+            $y = $focal_point['y'];
+          }
+          $variables['focal_point_x'] = $x;
+          $variables['focal_point_y'] = $y;
+        }
+      }
+    }
+  }
+
+  $variables['focal_point'] = FALSE;
+  if ($assembly->hasField('field_background_image')) {
+    $media_value = $assembly->get('field_background_image')->getValue();
+    if ($media_value) {
+      $media = Media::load($media_value[0]['target_id']);
+      $image_value = $media->get('field_media_image')->getValue();
+      $variables['focal_point'] = FALSE;
+      $variables['focal_point_x'] = 0;
+      $variables['focal_point_y'] = 0;
+      
+      if ($image_value) {
+        $file_id = $image_value[0]['target_id'];
+        $focal_point = alloy_assemblies_get_focal_point($assembly, $file_id);
+        $uri = File::load($file_id)->getFileUri();
+        $url = ImageStyle::load('billboard')->buildUrl($uri);
+        $x = 0;
+        $y = 0;
+        if (isset($focal_point['x']) && isset($focal_point['y'])) {
+          $x = $focal_point['x'];
+          $y = $focal_point['y'];
+        }
+        $variables['bg_url'] = $url;
+        $variables['focal_point_x'] = $x;
+        $variables['focal_point_y'] = $y;
+        $variables['attributes']->setAttribute('style', 'background-image: url(' . $url . '); background-position: ' . $x . '% ' . $y . '%;');
+        $variables['focal_point'] = $focal_point;
+        $variables['attributes']->addClass('has-background');
+      }
+    }
+  }  
+
+  if ($type == 'layout_split') {
+    $variables['attributes']->addClass($assembly->field_split_layout->value);
+    $left_classes = ['col-xs-12'];
+    $right_classes = ['col-xs-12'];
+    switch ($assembly->field_split_layout->value) {
+      case 'layout-50-50':
+        $left_classes[] = 'col-sm-6';
+        $right_classes[] = 'col-sm-6';
+        break;
+      case 'layout-33-67':
+        $left_classes[] = 'col-sm-4';
+        $right_classes[] = 'col-sm-8';
+        break;
+      case 'layout-67-33':
+        $left_classes[] = 'col-sm-8';
+        $right_classes[] = 'col-sm-4';
+        break;
+      case 'layout-25-75':
+        $left_classes[] = 'col-sm-3';
+        $right_classes[] = 'col-sm-9';
+        break;
+      case 'layout-75-25':
+        $left_classes[] = 'col-sm-9';
+        $right_classes[] = 'col-sm-3';
+        break;
+      case 'layout-50-50-r':
+        $left_classes[] = 'col-sm-6 col-sm-push-6';
+        $right_classes[] = 'col-sm-6 col-sm-pull-6';
+        break;
+      case 'layout-33-67-r':
+        $left_classes[] = 'col-sm-4 col-sm-push-8';
+        $right_classes[] = 'col-sm-8 col-sm-pull-4';
+        break;
+      case 'layout-67-33-r':
+        $left_classes[] = 'col-sm-8 col-sm-push-4';
+        $right_classes[] = 'col-sm-4 col-sm-pull-8';
+        break;
+      case 'layout-25-75-r':
+        $left_classes[] = 'col-sm-3 col-sm-push-9';
+        $right_classes[] = 'col-sm-9 col-sm-pull-3';
+        break;
+      case 'layout-75-25-r':
+        $left_classes[] = 'col-sm-9 col-sm-push-3';
+        $right_classes[] = 'col-sm-3 col-sm-pull-9';
+        break;
+    }
+    $variables['left_classes'] = implode(' ', $left_classes);
+    $variables['right_classes'] = implode(' ', $right_classes);
+  }
+
+  if ($type == 'layout_columns') {
+    $columns = $assembly->field_columns->getValue();
+    $col_count = count($columns) > 4 ? 4 : count($columns);
+    $variables['column_span'] = '';
+    $variables['tablet_column_span'] = '';
+    if ($col_count) {
+      $variables['column_span'] = 12/$col_count;
+      $variables['tablet_column_span'] = $col_count > 1 ? 6 : 12;
+    }
+  }
+
+  if ($type == 'hubspot_cta_embed') {
+    if ($embed = $assembly->get('field_embed_code')->value) {
+      $hs_cta = alloy_assemblies_hubspot_cta_from_embed($embed);
+      if ($hs_cta && is_array($hs_cta)) {
+        $variables['content']['hubspot_cta'] = $hs_cta + ['#theme' => 'hubspot_cta'];
+      }
+      else {
+        $hs_form = alloy_assemblies_parse_hubspot_embed($embed);
+        if ($hs_form && is_array($hs_form)) {
+          \Drupal::messenger()->addError('Embed code is for a Hubspot Form, but assembly type is Hubspot CTA.');
+        }
+        else {
+          \Drupal::messenger()->addError('Invalid embed code for Hubspot CTA');
+        }
+      }
+    }
+  }
+
+  if ($type == 'hubspot_form_embed') {
+    $random = new Random();
+    $variables['content']['hubspot_form'] = [
+      '#theme' => 'hubspot_form',
+      '#weight' => 100,
+    ] + alloy_assemblies_parse_hubspot_embed($assembly->get('field_embed_code')->value);
+    $variables['assembly_id'] = $assembly->get('uuid')->value;
+  }
+
+  if ($type == 'logo') {
+    $variables['#attached']['library'][] = 'alloy_assemblies/logos';
+  }
+}
+
+/**
+ * Extract the CTA information from a HubSpot embed code.
+ */
+function alloy_assemblies_hubspot_cta_from_embed($embed) {
+  preg_match("/hbspt.cta.load\((.*)\)/", $embed, $matches);
+  if (!isset($matches[1]) || empty($matches[1])) {
+    return [];
+  }
+  $data = json_decode('[' . str_replace("'", '"', $matches[1]) . ']' );
+  return array(
+    '#hubspot_id' => $data[0],
+    '#uuid' => $data[1],
+  );
+}
+
+function alloy_assemblies_parse_hubspot_embed($embed) {
+  preg_match('/portalId:\s*(\'|\")(\d+)(\'|\")/i', $embed, $portal);
+  preg_match('/formid:\s*(\'|\")([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(\'|\")/i', $embed, $formid);
+
+  return [
+    '#portalid' => isset($portal[2]) && !empty($portal[2]) ? $portal[2] : FALSE,
+    '#formid' => isset($formid[2]) && !empty($formid[2]) ? $formid[2] : FALSE,
+  ];
+}
+
+function alloy_assemblies_theme($existing, $type, $theme, $path) {
+  $theme = [];
+  $theme['hubspot_form'] = [
+    'template' => 'hubspot-form',
+    'variables' => [
+      'portalid' => NULL,
+      'formid' => NULL
+    ],
+  ];
+  $theme['hubspot_cta'] = [
+    'template' => 'hubspot-cta',
+    'variables' => [
+      'hubspot_id' => NULL,
+      'uuid' => NULL,
+    ],
+  ];
+  return $theme;
+}
+
+function alloy_assemblies_theme_registry_alter(&$theme_registry) {
+  $path = drupal_get_path('module', 'alloy_assemblies');
+
+  // Assembly types with a default template
+  // defined in this module
+  $types = [
+    'call_to_action',
+    'layout_columns',
+    'layout_grid',
+    'layout_split',
+    'logo'
+  ];
+
+  foreach ($types as $type) {
+    if (isset($theme_registry['assembly']) && !isset($theme_registry['assembly__' . $type])) {
+      $theme_registry['assembly__' . $type] = $theme_registry['assembly'];
+      $theme_registry['assembly__' . $type]['template'] = 'assembly--' . str_replace('_', '-', $type);
+      $theme_registry['assembly__' . $type]['theme_path'] = $path;
+      $theme_registry['assembly__' . $type]['path'] = $path . '/templates';
+    }
+  }
+}
+
+function alloy_assemblies_get_focal_point(EntityInterface $entity, $file_id) {
+  $file = File::load($file_id);
+  $focal_point = FALSE;
+  if ($file) {
+    // Get focal point
+    $image = \Drupal::service('image.factory')->get($file->getFileUri());
+    $width = $image->getWidth();
+    $height = $image->getHeight();
+    if ($file) {
+      $crop_type = \Drupal::config('focal_point.settings')->get('crop_type');
+      $crop = Crop::findCrop($file->getFileUri(), $crop_type);
+      if ($crop) {
+        $anchor = \Drupal::service('focal_point.manager')
+          ->absoluteToRelative($crop->x->value, $crop->y->value, $width, $height);
+        $focal_point = $anchor;
+      }
+    }
+  }
+
+  return $focal_point;
+}

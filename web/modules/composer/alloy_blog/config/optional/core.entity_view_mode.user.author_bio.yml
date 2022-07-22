@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.author_bio
+label: 'Author Bio'
+targetEntityType: user
+cache: true

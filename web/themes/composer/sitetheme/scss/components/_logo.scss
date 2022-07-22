@@ -1,0 +1,50 @@
+$logo-gutter: $grid-gutter-width * 2;
+$tablet-logo-gutter: $logo-gutter/2;
+$mobile-logo-gutter: $logo-gutter/4;
+
+.logo.entity {
+  a.logo-link {
+    display: block;
+  }
+  img {
+    max-width: 100%;
+    height: auto !important;
+  }
+}
+
+.logo-list {
+  text-align: center;
+  @include list-unstyled;
+  font-size: 0;
+  margin-left: -$mobile-logo-gutter/2;
+  margin-right: -$mobile-logo-gutter/2;
+  padding-top: $mobile-logo-gutter/2;
+  padding-bottom: $mobile-logo-gutter/2;
+  @include tablet {
+    padding-top: $tablet-logo-gutter/2;
+    padding-bottom: $tablet-logo-gutter/2;
+    margin-left: -$tablet-logo-gutter/2;
+    margin-right: -$tablet-logo-gutter/2;
+  }
+  @include desktop {
+    padding-top: $logo-gutter/2;
+    padding-bottom: $logo-gutter/2;
+    margin-left: -$logo-gutter/2;
+    margin-right: -$logo-gutter/2;
+  }
+  > li {
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    padding: $mobile-logo-gutter/2;
+    max-width: 300px;
+    @include tablet {
+      width: 33.33333%;
+      padding: $tablet-logo-gutter/2;
+    }
+    @include desktop {
+      width: 25%;
+      padding: $logo-gutter/2;
+    }
+  }
+}

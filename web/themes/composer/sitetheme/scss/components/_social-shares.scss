@@ -1,0 +1,29 @@
+.social-buttons {
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > * {
+    height: 20px;
+    display: block;
+  }
+  @include small {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-bottom: 0;
+  }
+}
+.social-btn {
+  margin-left: 5px;
+  .fb-share-button {
+    display: inline-block;
+    vertical-align: top;
+    > span {
+      vertical-align: top !important;
+    }
+  }
+  .IN-widget {
+    vertical-align: top !important;
+  }
+}

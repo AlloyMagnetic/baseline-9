@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - assembly.assembly_type.media
+    - field.storage.node.field_billboard
+    - node.type.page
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: _bo9kazb88AWfrm8lwz5UiZI50Tqz77wru-jaTvsaEY
+id: node.page.field_billboard
+field_name: field_billboard
+entity_type: node
+bundle: page
+label: Billboard
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:assembly'
+  handler_settings:
+    target_bundles:
+      media: media
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference_revisions

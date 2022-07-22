@@ -1,0 +1,6 @@
+name: Notification Bar
+type: module  
+description: Display a notification bar at the top of every page
+core: 8.x  
+core_version_requirement: ^8 || ^9
+package: Custom 

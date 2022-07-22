@@ -1,0 +1,56 @@
+.tile {
+  max-width: 250px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  @include large {
+    max-width: none;
+  }
+  &:hover, &:focus, &:active {
+    .tile-image {
+      transform: scale(1.2);
+      opacity: 0.3;
+    }
+  }
+  > a {
+    display: block;
+  }
+  .tile-inner-wrapper {
+    position: relative;
+    background-color: #000;
+    width: 100%;
+    padding-top: 70%;
+  }
+  .tile-image {
+    background-size: cover;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: ease-in-out 200ms;
+    transform: scale(1);
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .field--name-field-title {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    transform: translateY(-50%);
+    color: #FFF;
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    padding: 10px;
+    @include desktop {
+      padding: 20px;
+    }
+  }
+}

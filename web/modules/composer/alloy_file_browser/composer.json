@@ -1,0 +1,12 @@
+{
+  "name": "alloy/alloy_file_browser",
+  "type": "drupal-module",
+  "description": "Customize the File Browser module for use with Alloy baseline",
+  "keywords": ["Drupal"],
+  "license": "proprietary",
+  "homepage": "https://code.kilpho.st/alloy/alloy-file-browser",
+  "minimum-stability": "dev",
+  "support": {
+  },
+  "require": { }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "alloy/notification_bar",
+  "type": "drupal-module",
+  "description": "Configurable notification bar",
+  "keywords": ["Drupal"],
+  "license": "proprietary",
+  "homepage": "https://code.kilpho.st/alloy/notification_bar",
+  "minimum-stability": "dev",
+  "support": {
+  },
+  "require": { }
+}

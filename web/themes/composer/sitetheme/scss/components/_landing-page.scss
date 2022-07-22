@@ -1,0 +1,25 @@
+.landing-page {
+  &.full {
+    .body-col {
+      @include large {
+        padding-right: 0;
+      }
+    }
+    .poster-image-col {
+      margin-top: 40px;
+      @include desktop {
+        margin-top: 0;
+      }
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    .body-col + .poster-image-col {
+      @include large {
+        padding-left: 55px;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-    "name": "pantheon-upstreams/drupal-project",
+    "name": "pantheon-upstreams/drupal-composer-managed",
     "description": "Install Drupal 9 with Composer on Pantheon.",
     "type": "project",
     "license": "MIT",
@@ -22,6 +22,8 @@
         "alloy/notification_bar": "8.x-dev",
         "alloy/pyrite": "dev-master",
         "alloy/sitetheme": "1.x-dev",
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
         "drupal/assembly": "1.x-dev",
         "drupal/beryllium": "1.x-dev",
         "drupal/bootstrap": "^3.25",
@@ -31,9 +33,9 @@
         "drupal/config_direct_save": "^1.2",
         "drupal/config_filter": "^2.2",
         "drupal/config_ignore": "^2.3",
-        "drupal/core-composer-scaffold": "9.4.3",
-        "drupal/core-project-message": "9.4.3",
-        "drupal/core-recommended": "9.4.3",
+        "drupal/core-composer-scaffold": "^9.2",
+        "drupal/core-project-message": "^9.2",
+        "drupal/core-recommended": "^9.2",
         "drupal/devel": "^4.1",
         "drupal/devel_kint_extras": "^1.0",
         "drupal/entity_browser": "^2.5",
@@ -58,43 +60,33 @@
         "drupal/redirect": "^1.6",
         "drupal/redis": "^1.5",
         "drupal/simple_block": "^1.2",
-        "drupal/simple_sitemap": "^3.16",
+        "drupal/simple_sitemap": "^4.1",
         "drupal/symfony_mailer": "^1.0@alpha",
         "drupal/token": "^1.9",
         "drupal/varnish_purge": "^2.1",
-        "drupal/video": "^1.4",
         "drupal/webform": "^6.0",
         "drupal/yoast_seo": "^1.7",
-        "drush/drush": "^10",
+        "drush/drush": "^11 || ^12",
         "kint-php/kint": "^3.3",
-        "pantheon-upstreams/upstream-configuration": "*"
+        "pantheon-systems/drupal-integrations": "^9",
+        "pantheon-upstreams/upstream-configuration": "dev-main"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^9.2"
     },
     "conflict": {
             "drupal/drupal": "*"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "extra": {
-        "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/composer/{$name}": ["type:drupal-module"],
-            "web/profiles/composer/{$name}": ["type:drupal-profile"],
-            "web/themes/composer/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
-        },
-        "composer-exit-on-patch-failure": true,
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
         "drupal-scaffold": {
-            "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
-            ],
             "locations": {
                 "web-root": "./web"
             },
+            "allowed-packages": [
+                "pantheon-systems/drupal-integrations"
+            ],
             "file-mapping": {
                 "[project-root]/.editorconfig": false,
                 "[project-root]/pantheon.upstream.yml": false,
@@ -111,11 +103,43 @@
             "linkit_widget": {
                 "Drupal 9 support": "https://www.drupal.org/files/issues/2020-08-05/3163447-4.patch"
             }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
+        },
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
         }
+    },
+    "autoload": {
+        "classmap": [
+            "upstream-configuration/scripts/ComposerScripts.php"
+        ]
+    },
+    "scripts": {
+        "pre-update-cmd": [
+            "DrupalComposerManaged\\ComposerScripts::preUpdate"
+        ],
+        "upstream-require": [
+            "DrupalComposerManaged\\ComposerScripts::upstreamRequire"
+        ]
+    },
+    "scripts-descriptions": {
+        "upstream-require": "Add a dependency to an upstream. See https://pantheon.io/docs/create-custom-upstream for information on creating custom upstreams."
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true,
+        "sort-packages": false,
         "platform": {
             "php": "7.4"
         },

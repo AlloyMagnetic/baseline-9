@@ -1,0 +1,95 @@
+<?php
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+function alloy_compact_menu_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() == 'menu_link_content') {
+    $fields['short_title'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Short Link Title'))
+      ->setDescription(t('Enter a short title for compact menus'))
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -5,
+      ]
+    );
+  }
+
+  return $fields;
+}
+
+function alloy_compact_menu_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  $node = $form_state->getFormObject()->getEntity();
+  $defaults = menu_ui_get_menu_link_defaults($node);
+  $menu_link = MenuLinkContent::load($defaults['entity_id']);
+  $existing_short_title = '';
+  if ($menu_link) {
+    $existing_short_title = $menu_link->get('short_title')->value;
+  }
+
+  $form['menu']['link']['short_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Short link title'),
+    '#default_value' => $existing_short_title,
+    '#maxlength' => $defaults['title_max_length'],
+    '#weight' => -1,
+  ];
+  $form['menu']['link']['title']['#weight'] = -2;
+
+  foreach (array_keys($form['actions']) as $action) {
+    if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+      $form['actions'][$action]['#submit'][] = 'alloy_compact_menu_node_form_submit';
+    }
+  }
+
+}
+
+function alloy_compact_menu_node_form_submit(&$form, FormStateInterface &$form_state) {
+  $values = $form_state->getValue('menu');
+  if ($values['entity_id']) {
+    $menu_link = MenuLinkContent::load($values['entity_id']);
+    $menu_link->short_title->value = $values['short_link_title'];
+    $menu_link->save();
+  }
+}
+
+function alloy_compact_menu_module_implements_alter(&$implementations, $hook) {
+  // This module needs to go last so it can alter the form elements added by
+  // menu_ui
+  if (isset($implementations['alloy_compact_menu'])) {
+    $group = $implementations['alloy_compact_menu'];
+    unset($implementations['alloy_compact_menu']);
+    $implementations['alloy_compact_menu'] = $group;
+  }
+}
+
+function alloy_compact_menu_preprocess_menu(&$variables) {
+  foreach ($variables['items'] as &$item) {
+    if (get_class($item['original_link']) == 'Drupal\menu_link_content\Plugin\Menu\MenuLinkContent') {
+      $meta_data = $item['original_link']->getMetaData();
+      $menu_link_content_id = $meta_data['entity_id'];
+      $menu_link = MenuLinkContent::load($menu_link_content_id);
+      $short_title = $menu_link->short_title->value;
+
+      $new_title = [];
+      if ($short_title) {
+        $new_title[] = '<span class="has-short-title">';
+        $new_title[] = '<span class="long-title visible-md-inline visible-lg-inline">';
+      }
+      $new_title[] =  $item['title'];
+      if ($short_title) {
+        $new_title[] = '</span>';
+        $new_title[] = '<span class="short-title visible-xs-inline visible-sm-inline">' . $short_title . '<span>';
+        $new_title[] = '</span>';
+      }
+      $item['title'] = Markup::create(implode('', $new_title));
+    }
+  }
+}

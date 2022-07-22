@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "untitled.css",
+	"sources": [
+		"../../scss/components/untitled.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AACE,oBADkB,CAClB,cAAc,CAAC;EACb,UAAU,EAAE,MAAM,GAOnB;EATH,AACE,oBADkB,CAClB,cAAc,AAEZ,OAAQ,CAAC;IACP,OAAO,EAAE,EAAE;IACX,KAAK,EAAE,IAAI;IACX,MAAM,EAAE,GAAG;IACX,gBAAgB,EAAE,OAAO,GAC1B"
+}

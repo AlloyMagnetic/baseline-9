@@ -1,0 +1,7 @@
+notification_bar:
+  version: 1.x
+  css:
+    layout:
+      css/notification-bar-layout.css: {}
+  js:
+    js/notification-bar.js: {}

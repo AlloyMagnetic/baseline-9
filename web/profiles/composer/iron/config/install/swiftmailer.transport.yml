@@ -1,0 +1,9 @@
+transport: smtp
+smtp_host: smtp.mailgun.org
+smtp_port: 2525
+smtp_encryption: tls
+smtp_username: postmaster@mg.kilpho.st
+smtp_password: f4128455c102e6d97d6c82b72dbd0934
+sendmail_path: /usr/sbin/sendmail
+sendmail_mode: bs
+spool_directory: ''

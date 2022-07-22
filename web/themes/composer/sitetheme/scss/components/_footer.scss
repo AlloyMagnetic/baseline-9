@@ -1,0 +1,62 @@
+.page-footer {
+  background-color: #333;
+  padding-top:  40px;
+  color: #FFF;
+  a {
+    color: inherit;
+  }
+  .logo-col {
+    margin-bottom: 20px;
+    @include tablet {
+      padding-right: 40px;
+    }
+    img {
+      width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      @include tablet {
+        margin: 0;
+      }
+    }
+  }
+  .footer-bottom {
+    margin-top: 40px;
+    background-color: #000;
+    font-size: 12px;
+    padding: 0.75em 0;
+    color: darken(#FFF, 10%);
+    .dev-credit {
+      color: #555;
+    }
+  }
+  .footer-credit {
+    @include tablet {
+      text-align: right;
+    }
+  }
+  .nav {
+    margin-left: -$grid-gutter-width/2;
+    margin-right: -$grid-gutter-width/2;
+    @include tablet {
+      column-count: 3;
+      max-height: 330px;
+    }
+    > li {
+      line-height: 2;
+      padding: 0 $grid-gutter-width/2;
+      break-inside: avoid-column;
+      > a {
+        line-height: 1;
+        padding: 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+        display: inline-block;
+        &:active, &:focus, &:hover, &.active, &.is-active {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.assembly-type-image_with_content {
+  background-size: cover;
+  &.white-text {
+    color: #FFF;
+  }
+  .inline-row {
+    @include tablet {
+      @include inline-row;
+    }
+  }
+  .inline-column {
+    @include tablet {
+      @include inline-columns(2, top);
+    }
+    @include desktop {
+      @include inline-columns(2, middle);
+    }
+    &.image {
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 285px;
+        @include tablet {
+          width: 305px;
+        }
+        @include desktop {
+          width: 415px;
+        }
+        @include large {
+          width: 500px;
+        }
+      }
+    }
+  }
+  &.right {
+    .image {
+      @include tablet {
+        margin-left: 50%;
+      }
+    }
+    .content {
+      @include tablet {
+        margin-left: -100%;
+      }
+    }
+  }
+}

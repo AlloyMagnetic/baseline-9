@@ -1,0 +1,13 @@
+<?php
+
+function notification_bar_theme($existing, $type, $theme, $path) {
+  return [
+    'notification_bar' => [
+      'variables' => [
+        'message' => NULL,
+        'url' => NULL,
+        'button_text' => NULL
+      ],
+    ],
+  ];
+}

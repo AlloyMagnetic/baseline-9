@@ -1,0 +1,21 @@
+<?php
+
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * Remove hubspot ID and hubspot UUID fields.
+ */
+function alloy_assemblies_update_8001(&$sandbox) {
+  foreach (['field_hubspot_id', 'field_hubspot_uuid'] as $field) {
+    $field = FieldStorageConfig::loadByName('assembly', $field);
+    if ($field) {
+      $field->delete();
+    }
+  }
+
+}
+
+function alloy_assemblies_update_8002(&$sandbox) {
+  \Drupal::keyValue('system.schema')->delete('alloy_ctas');
+}

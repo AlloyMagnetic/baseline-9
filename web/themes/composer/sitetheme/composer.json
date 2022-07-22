@@ -1,0 +1,12 @@
+{
+    "name": "alloy/sitetheme",
+    "description": "Site Theme",
+    "type": "drupal-theme",
+    "authors": [
+        {
+            "name": "Matt Moen",
+            "email": "matt@alloymagnetic.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,0 +1,161 @@
+<?php
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+use Drupal\block\Entity\Block;
+
+function sitetheme_preprocess_page(&$variables) {
+  $theme_name = 'sitetheme';
+  $node = sitetheme_get_current_node();
+  $route = \Drupal::routeMatch()->getRouteName();
+
+  $form = Block::load($theme_name . '_searchform');
+  $variables['search_form'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($form);
+
+  $variables['menu'] = $variables['page']['navigation_collapsible'][$theme_name . '_main_menu'];
+  $variables['nav_cta'] = FALSE;
+  $variables['nav_inline'] = theme_get_setting('navbar_layout', 'sitetheme') == 'nav_inline' ?: FALSE;
+
+  // Variables for phone block
+  $variables['phone_block'] = FALSE;
+  $phone = theme_get_setting('phone_number', $theme_name);
+  if ($phone) {
+    $variables['phone_block'] = TRUE;
+    $variables['phone_formatted'] = theme_get_setting('phone_number', $theme_name);
+    $variables['phone_unformatted'] = preg_replace("/[^A-Za-z0-9]/", "", $variables['phone_formatted']);
+  }
+
+  $variables['site_logo'] = [
+    '#theme' => 'image',
+    '#uri' => str_replace('.svg', '-white.png', theme_get_setting('logo.url')),
+    '#alt' => t('Home'),
+  ];
+
+  // Make site name available
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
+  // Pull billboards to page level
+  if ($node && isset($node->field_billboard)) {
+    $viewBuilder = \Drupal::entityTypeManager()->getViewBuilder('node');
+    $output = $viewBuilder->viewField($node->field_billboard, 'full');
+    $output['#cache']['tags'] = $node->getCacheTags();
+    $variables['page']['billboard'] = $output;
+  }
+
+  // Set a narrow container if necessary
+  $variables['full_width'] = FALSE;
+  if ($node) {
+    if ($node->field_poster_image && $node->field_poster_image->getValue()) {
+      $variables['full_width'] = TRUE;
+    }
+    if ($node->field_sidebar_ctas && $node->field_sidebar_ctas->getValue()) {
+      $variables['full_width'] = TRUE;
+    }
+    if ($node->field_sidebar && $node->field_sidebar->getValue()) {
+      $variables['full_width'] = TRUE;
+    }
+  }
+  if (in_array($route, ['entity.taxonomy_term.canonical', 'entity.blog.canonical']) || strpos($route, 'view.blog') !== FALSE) {
+    $variables['full_width'] = TRUE;
+  }
+
+  // Provide container when the node template doesn't handle it
+  $variables['page_level_container'] = true;
+  if ($route = \Drupal::routeMatch()->getRouteName() && in_array($route, ['entity.node.canonical', 'entity.node.revision'])) {
+    $variables['page_level_container'] = false;
+    unset($variables['page']['header'][$theme_name . '_page_title']);
+  }
+
+  // Provide bottom spacing when assemblies don't handle it.
+  $variables['page_level_bottom_spacing'] = true;
+  if ($node) {
+    if ($node->field_bottom_ctas && $node->field_bottom_ctas->getValue()) {
+      $variables['page_level_bottom_spacing'] = false;
+    }
+    elseif (!$node->field_bottom_ctas && $node->field_sections->getValue()) {
+      $variables['page_level_bottom_spacing'] = false;
+    }
+  }
+}
+
+function sitetheme_get_current_node() {
+  $route = \Drupal::routeMatch();
+  switch ($route->getRouteName()) {
+    case 'entity.node.canonical':
+      return $route->getParameter('node');
+    case 'entity.node.revision':
+      return node_revision_load($route->getParameter('node_revision'));
+  }
+
+  return FALSE;
+}
+
+function sitetheme_preprocess_field(&$variables) {
+  if (in_array($variables['field_name'], ['field_title', 'field_headline']) && $variables['element']['#entity_type'] == 'assembly') {
+    $assembly = $variables['element']['#object'];
+    if ($assembly->hasField('field_show_page_title') && $assembly->get('field_show_page_title')->value) {
+      // collect classes
+      foreach ($variables['items'] as &$item) {
+        foreach (['field_tag', 'field_item_tag'] as $tag) {
+          if ($variables[$tag] != 'none') {
+            $item['attributes']->addClass($variables[$tag]);
+          }
+        }
+      }
+
+      $variables['field_item_tag'] = 'h1';
+      $variables['field_tag'] = 'none';
+    }
+  }
+}
+
+function sitetheme_preprocess_node(&$variables) {
+  $variables['show_title'] = true;
+  if (!sitetheme_should_show_page_title()) {
+    $variables['show_title'] = false;
+  }
+}
+
+function sitetheme_should_show_page_title() {
+  $node = sitetheme_get_current_node();
+  if (!$node) {
+    return TRUE;
+  }
+
+  foreach ($node->getFieldDefinitions() as $field) {
+    if (in_array($field->getType(),  ['entity_reference', 'entity_reference_revisions'])) {
+      $storage = $field->getFieldStorageDefinition();
+      if ($storage->getSettings()['target_type'] != 'assembly') {
+        continue;
+      }
+
+      foreach ($node->get($field->getName())->referencedEntities() as $assembly) {
+        if ($assembly->hasField('field_show_page_title') && $assembly->get('field_show_page_title')->value) {
+          return FALSE;
+        }
+      }
+
+    }
+  }
+
+  return TRUE;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block templates.
+ */
+function sitetheme_preprocess_block(&$variables) {
+  switch ($variables['base_plugin_id']) {
+    case 'system_branding_block':
+      $variables['site_logo'] = FALSE;
+      if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+        $variables['site_logo'] = str_replace('.svg', '.png', $variables['content']['site_logo']['#uri']);
+      }
+      break;
+  }
+}

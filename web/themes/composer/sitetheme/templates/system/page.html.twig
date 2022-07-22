@@ -1,0 +1,179 @@
+{% set container = 'container' %}
+{% set container_width = full_width ? 'normal' : 'narrow' %}
+
+<div class="body-wrapper">
+
+  {# Pre-page #}
+  {% if page.pre_page %}
+    {% block pre_page %}
+      <div class="pre_page">{{ page.pre_page }}</div>
+    {% endblock %}
+  {% endif %} {# End Pre-page #}
+
+  {# Masthead #}
+  <div class="masthead">
+    
+    <div class="top-bar">
+      <div class="container">
+        <div class="nav-wrapper">
+          {{ page.top_bar }}
+          <a href="/search" class="search-link">Search<span class="glyphicon glyphicon-search"></span></a>
+        </div>
+      </div>
+    </div>
+
+    {% if page.navigation or page.navigation_collapsible %}
+      {% block navbar %}
+        {% set navbar_classes = ['navbar',
+          theme.settings.navbar_inverse ? 'navbar-inverse' : 'navbar-default navbar-main',
+          theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : '',
+          nav_inline ? 'navbar-nav-inline' : 'navbar-nav-below']%}
+
+        <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
+          {% if not navbar_attributes.hasClass(container) and nav_inline %}
+            <div class="{{ container }}">
+          {% endif %}
+          
+          <div class="main-nav-wrapper">
+            {% if not navbar_attributes.hasClass(container) and not nav_inline %}
+              <div class="{{ container }}">
+            {% endif %}
+            <div class="navbar-header">
+              {{ page.navigation }}
+              {% if page.navigation_collapsible %}
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                  <span class="sr-only">{{ 'Toggle navigation'|t }}</span>
+                  <div class="icon-bar-wrapper">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </div>
+                </button>
+              {% endif %}
+              {% if phone_block %}
+                <div class="phone-block mobile"><a href="tel:+1{{ phone_unformatted }}"><span class="glyphicon glyphicon-earphone icon"></span><span class="text">{{ 'Call Now'|t }}</span></a></div>
+              {% endif %}
+            </div>
+            {% if phone_block and not nav_inline or theme.settings.phone_cta_text and not nav_inline %}
+              <div class="phone-block desktop"><p>{{ theme.settings.phone_cta_text|t }}</p><p class="phone"><span class="phone-text">{{ phone_formatted }}</span><a href="tel:+1{{ phone_unformatted }}" class="phone-link">{{ phone_formatted }}</a></p></div>
+            {% endif %}
+
+            {# Navigation (collapsible) #}
+            {% if page.navigation_collapsible %}
+              <div id="navbar-collapse" class="navbar-collapse collapse">
+                {{ page.navigation_collapsible }}
+              </div>
+            {% endif %} {# End Navigation (collapsible) #}
+
+            {% if not navbar_attributes.hasClass(container) and not nav_inline %}
+              </div>
+            {% endif %}
+            <div class="exposed-nav">
+              {% if not navbar_attributes.hasClass(container) and not nav_inline %}
+                <div class="{{ container }}">
+              {% endif %}
+              {{ menu }}
+              {% if not navbar_attributes.hasClass(container) and not nav_inline %}
+                </div>
+              {% endif %}
+            </div>
+            {% if phone_block and nav_inline or theme.settings.phone_cta_text and nav_inline %}
+              <div class="phone-block desktop">{% if theme.settings.phone_cta_text %}<p>{{ theme.settings.phone_cta_text|t }}</p>{% endif %}<p class="phone"><span class="phone-text">{{ phone_formatted }}</span><a href="tel:+1{{ phone_unformatted }}" class="phone-link">{{ phone_formatted }}</a></p></div>
+            {% endif %}
+          </div>
+          {% if not navbar_attributes.hasClass(container) and nav_inline %}
+            </div>
+          {% endif %}
+          {% if nav_cta %}
+            <a href="/contact" class="btn btn-primary nav-cta mobile">Contact Us</a>
+          {% endif %}
+        </header>
+      {% endblock %}
+    {% endif %}
+  </div> {# End Masthead #}
+
+  {# Billboard #}
+  {% if page.billboard %}
+    {{ page.billboard }}
+  {% endif %} {# End Billboard #}
+
+  {# Main #}
+  {% block main %}
+    <div role="main" class="main-container js-quickedit-main-content">
+
+      {% if page_level_container %}
+        <div class="container {{ container_width }}">
+      {% endif %}
+
+      {# Content Section #}
+      <section{{ content_attributes.addClass(content_classes) }}>
+
+        {% if page_level_container %}
+          <div class="page-spacing"></div>
+        {% endif %}
+
+        {# Header #}
+        {% if page.header %}
+          {% block header %}
+            <div role="heading" {% if not page_level_container %} class="container {{ container_width }}" {% endif %}>
+              {{ page.header }}
+            </div>
+          {% endblock %}
+        {% endif %} {# End Header #}
+
+        {# Content #}
+        {% block content %}
+          <a id="main-content"></a>
+          {{ page.content }}
+        {% endblock %} {# End Content #}
+
+      </section> {# End Content Section #}
+
+      {% if page_level_bottom_spacing %}
+        <div class="page-spacing"></div>
+      {% endif %}
+
+      {% if page_level_container %}
+        </div>
+      {% endif %}
+
+    </div>
+  {% endblock %} {# End Main #}
+
+</div>
+
+{# Footer #}
+{% if page.footer %}
+  {% block footer %}
+    <footer class="page-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 logo-col">
+            <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+              {{ site_logo }}
+            </a>
+          </div>
+          <div class="col-sm-9">
+            {{ page.footer }}
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-9 col-sm-push-3">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="footer-copyright">&copy; {{ "now"|date("Y") }} {{ site_name }}</div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="footer-credit"><a href="https://www.alloymagnetic.com" title="Alloy Digital Marketing & Web Design" class="dev-credit">Website Design by Alloy Digital Agency</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  {% endblock %}
+{% endif %} {# End Footer #}

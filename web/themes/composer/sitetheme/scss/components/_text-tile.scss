@@ -1,0 +1,39 @@
+.text-tile {
+  .text-tile-wrapper {
+    display: block;
+    color: $text-color;
+    background-color: #FFF;
+    border: 2px solid transparent;
+    padding: 25px;
+    transition: 200ms ease-in-out;
+    &:hover, &:active, &:focus {
+      border-color: #DDD;
+      text-decoration: none;
+    }
+  }
+  .text-tile-title {
+    font-size: $font-size-h4;
+    @include tablet {
+      font-size: $desktop-font-size-h4;
+    }
+  }
+}
+
+.text-tile-list {
+  @include list-unstyled;
+  margin-top: -$grid-gutter-width/2;
+  margin-bottom: -$grid-gutter-width/2;
+  @include tablet {
+    @include inline-row;
+  }
+  > li {
+    padding-top: $grid-gutter-width/2;
+    padding-bottom: $grid-gutter-width/2;
+    @include tablet {
+      @include inline-columns(2);
+    }
+    @include desktop {
+      @include inline-columns(3);
+    }
+  }
+}

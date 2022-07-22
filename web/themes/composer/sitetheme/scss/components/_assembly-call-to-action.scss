@@ -1,0 +1,43 @@
+.assembly-type-call_to_action {
+  color: #FFF;
+  padding: 40px 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  @include desktop {
+    padding: 30px 0;
+  }
+  .btn {
+    margin: 0;
+  }
+  h3, .h3 {
+    margin: 0;
+  }
+  .make-row {
+    @include tablet {
+      display: table;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    > div {
+      @include tablet {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+  .right-col {
+    margin-top: 20px;
+    @include tablet {
+      text-align: left;
+      padding-left: 30px;
+      margin-top: 0;
+    }
+  }
+  .left-col {
+    @include tablet {
+      text-align: right;
+      padding-right: 30px;
+    }
+  }
+}

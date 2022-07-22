@@ -1,0 +1,83 @@
+name: Iron
+type: profile
+description: 'Install with Alloy default settings.'
+version: VERSION
+core: 8.x
+core_version_requirement: ^8 || ^9
+install:
+  - update
+  - node
+  - history
+  - block
+  - breakpoint
+  - ckeditor
+  - color
+  - config
+  - comment
+  - contextual
+  - contact
+  - ctools
+  - honeypot
+  - menu_link_content
+  - datetime
+  - block_content
+  - quickedit
+  - editor
+  - help
+  - image
+  - imce
+  - linkit
+  - link
+  - fences
+  - menu_ui
+  - options
+  - path
+  - pathologic
+  - pathauto
+  - page_cache
+  - dynamic_page_cache
+  - taxonomy
+  - dblog
+  - redirect
+  - search
+  - shortcut
+  - toolbar
+  - field
+  - field_ui
+  - file
+  - filter
+  - rdf
+  - webform
+  - webform_ui
+  - views
+  - views_ui
+  - tour
+  - automated_cron
+  - text
+  - token
+  - user
+  - redis
+  - assembly
+  - yoast_seo
+  - focal_point
+  - config_filter
+  - config_ignore
+  - symfony_mailer
+  - symfony_mailer_bc
+  - ckeditor_styles_js
+  - metatag
+  - metatag_twitter_cards
+  - pyrite
+  - notification_bar
+  - media
+  - media_library
+  - alloy_assemblies
+  - migrate_plus
+  - migrate_tools
+  - migrate_source_csv
+  - menu_link_attributes
+themes:
+  - bootstrap
+  - beryllium
+  - claro
+  - sitetheme

@@ -1,0 +1,51 @@
+{#
+#}
+{%
+  set classes = [
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+{% set sidebar = content.field_sidebar|render %}
+{% set width = (sidebar == false) ? 'narrow' %}
+
+<article{{ attributes.addClass(classes) }}>
+
+  <div{{ content_attributes.addClass('content') }}>
+    <div class="container {{ width }}">
+      <div class="row">
+        {% if sidebar %}
+          <div class="col-sm-8">
+        {% else %}
+          <div class="col-sm-12">
+        {% endif %}
+
+        {# Page Header #}
+        {% if show_title %}
+          <h1 class="page-header">{{ node.label }}</h1>
+        {% endif %} {# End Page Header #}
+
+        {# Content #}
+        {{ content|without('field_sections', 'field_billboard', 'field_sidebar') }} {# End Content #}
+        
+        {% if sidebar %}
+          </div>
+          {# Sidebar #}
+          <aside class="col-sm-4 sidebar">
+            {{ sidebar }}
+          </aside> {# End Sidebar #}
+        {% else %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  {{ content.field_sections }}
+
+</article>

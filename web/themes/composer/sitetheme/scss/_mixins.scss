@@ -1,0 +1,92 @@
+@mixin small {
+ @media (min-width: #{$screen-xs-min}) {
+   @content;
+ }
+}
+
+@mixin nav-break {
+  @media (min-width: #{$grid-float-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: #{$screen-md-min - 1}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+ @media (min-width: #{$screen-sm-min}) {
+   @content;
+ }
+}
+
+@mixin desktop {
+ @media (min-width: #{$screen-md-min}) {
+   @content;
+ }
+}
+
+@mixin large {
+ @media (min-width: #{$screen-lg-min}) {
+   @content;
+ }
+}
+
+@mixin inline-row($gutter: $grid-gutter-width) {
+  margin-left: -$gutter/2;
+  margin-right: -$gutter/2;
+  font-size: 0;
+  letter-spacing: 0;
+  > * {
+    font-size: $font-size-base;
+  }
+}
+
+@mixin inline-columns($columns: 1, $align: top, $gutter: $grid-gutter-width) {
+  display: inline-block;
+  width: 1/$columns * 100%;
+  padding-left: $gutter/2;
+  padding-right: $gutter/2;
+  vertical-align: $align;
+  letter-spacing: $letter-spacing-base;
+}
+
+@mixin list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+@mixin list-inline {
+  @include list-unstyled;
+  margin-left: -5px;
+
+  > li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+@mixin lead-text {
+  font-size: $font-size-lead;
+  font-family: $font-family-sans-serif;
+  font-weight: normal;
+  @include tablet {
+    font-size: $desktop-font-size-lead;
+  }
+}
+
+@mixin responsive($property, $xs, $sm, $md: $sm, $lg: $md) {
+  #{$property}: $xs;
+  @media (min-width: #{$screen-sm-min}) {
+    #{$property}: $sm;
+  }
+  @media (min-width: #{$screen-md-min}) {
+    #{$property}: $md;
+  }
+  @media (min-width: #{$screen-lg-min}) {
+    #{$property}: $lg;
+  }
+}

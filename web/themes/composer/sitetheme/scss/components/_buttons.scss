@@ -1,0 +1,270 @@
+@mixin button-variant-ex($color, $background, $border, $color-hover: $color, $background-hover: darken($background, 10%), $background-focus: darken($background, 17%)) {
+  color: $color;
+  border-color: $border;
+  transition: ease-in-out 200ms;
+  background-color: $background;
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    color: $color-hover;
+    background-color: $background-hover;
+    border-color: darken($background-hover, 2%);
+  }
+  &:hover {
+    color: $color-hover;
+    border-color: darken($background-hover, 2%);
+    background-color: $background-hover;
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    outline: 0;
+    color: $color-hover;
+    border-color: darken($background-hover, 2%);
+    background-color: $background-hover;
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color-hover;
+      border-color: darken($background-focus, 5%);
+    }
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color;
+      border-color: $border;
+    }
+  }
+
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}
+
+.btn {
+  font-weight: $btn-font-weight;
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  background: none;
+  border: 1px solid transparent;
+  white-space: normal;
+  @include button-size(1em, 1.25em, 16px, $line-height-base, $btn-border-radius-base);
+  @include user-select(none);
+  position: relative;
+  overflow: hidden;
+  @include tablet {
+    margin-right: 12px;
+  }
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -9%;
+    height: 100%;
+    width: 117%;
+    transform: skewX(-20deg) scaleX(0);
+    z-index: -1;
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    z-index: -2;
+  }
+
+  @include transition-duration(200ms);
+  &:hover, &:active, &:visited, &:focus, &:active:focus, &.active {
+    @include box-shadow(none);
+    outline: 0;
+  }
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      @include tab-focus;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.focus {
+    color: $btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: $cursor-disabled;
+    @include opacity(.65);
+    @include box-shadow(none);
+  }
+
+  // [converter] extracted a& to a.btn
+}
+
+a.btn {
+  &.disabled,
+  fieldset[disabled] & {
+    pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+  }
+}
+
+.btn-default {
+  @include button-variant-ex($btn-default-color, $btn-default-bg, $btn-default-border, $btn-default-hover-color, $btn-default-hover-bg, $btn-default-hover-bg);
+}
+
+.btn-primary {
+  @include button-variant-ex($btn-primary-color, $btn-primary-bg, $btn-primary-border, $btn-primary-hover-color, $btn-primary-hover-bg, $btn-primary-hover-bg);
+}
+
+.btn-primary-outline {
+  @include button-variant-ex($btn-primary-bg, $btn-primary-color, $btn-primary-border, $btn-primary-color, $btn-primary-bg, $btn-primary-hover-bg);
+}
+
+.btn-success, .btn-secondary {
+  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+}
+
+.btn-secondary-outline {
+  @include button-variant-ex($btn-success-bg, $btn-success-color, $btn-success-border, $btn-success-color, $btn-success-bg, $btn-success-hover-bg);
+}
+
+.btn-info, .btn-tertiary {
+  @include button-variant-ex($btn-info-color, $btn-info-bg, $btn-info-border, $btn-info-hover-color, $btn-info-hover-bg, $btn-info-hover-bg);
+}
+
+.btn-tertiary-outline {
+  @include button-variant-ex($btn-info-bg, $btn-info-color, $btn-info-border, $btn-info-color, $btn-info-bg, $btn-info-hover-bg);
+}
+
+// Warning appears as orange
+.btn-warning {
+  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+}
+// Danger and error appear as red
+.btn-danger {
+  @include button-variant-ex($btn-danger-color, $btn-danger-bg, $btn-danger-border, white, $btn-danger-color);
+}
+
+.button {
+  @extend .btn;
+  @extend .btn-default;
+}
+
+.button--primary {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.btn-link {
+  color: $link-color;
+  font-weight: normal;
+  border-radius: 0;
+
+  &,
+  &:active,
+  &.active,
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+  }
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+    background-color: transparent;
+  }
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus {
+      color: $btn-link-disabled-color;
+      text-decoration: none;
+    }
+  }
+}
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+}
+.btn-sm {
+  // line-height: ensure proper height of button next to small input
+  @include button-size(0.55em, 0.9em, 12px, $line-height-base, $btn-border-radius-small);
+}
+.btn-xs {
+  @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+}
+
+// Operations buttons, usually in tables
+.ief-entity-operations, .views-field-operations {
+  .btn {
+    @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+  }
+}
+
+
+// Block button
+// --------------------------------------------------
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+// Specificity overrides
+[type="submit"],
+[type="reset"],
+[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}
