@@ -111,9 +111,9 @@
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/modules/composer/{$name}": ["type:drupal-custom-module"],
-            "web/profiles/composer/{$name}": ["type:drupal-custom-profile"],
-            "web/themes/composer/{$name}": ["type:drupal-custom-theme"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
         },
         "composer-exit-on-patch-failure": true,
