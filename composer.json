@@ -71,7 +71,8 @@
         "drush/drush": "^11 || ^12",
         "kint-php/kint": "^3.3",
         "pantheon-systems/drupal-integrations": "^9",
-        "pantheon-upstreams/upstream-configuration": "dev-main"
+        "pantheon-upstreams/upstream-configuration": "dev-main",
+        "drupal/swiftmailer": "^2.2"
     },
     "require-dev": {
         "drupal/core-dev": "^9.2"
