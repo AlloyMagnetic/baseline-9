@@ -22,7 +22,7 @@
         "alloy/iron": "2.0.2",
         "alloy/notification_bar": "8.x-dev",
         "alloy/pyrite": "dev-master",
-        "alloy/sitetheme": "1.x-dev",
+        "alloy/sitetheme": "2.x-dev",
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.7",
         "drupal/assembly": "1.x-dev",
