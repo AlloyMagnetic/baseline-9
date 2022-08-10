@@ -1,7 +1,0 @@
-categories:
-  version: VERSION
-  js:
-    js/categories.js: {}
-  dependencies:
-    - core/jquery
-    - core/jquery.once
