@@ -146,7 +146,7 @@
             "drupal/core-composer-scaffold": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "zaporylie/composer-drupal-optimizations": true,
-            "drupal/core-project-message": true,
+            "drupal/core-project-message": true
         }
 
     }
