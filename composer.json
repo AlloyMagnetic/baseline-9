@@ -14,6 +14,7 @@
         }
     ],
     "require": {
+        "alloy/adamantine": "^1.0",
         "alloy/alloy_assemblies": "2.1.1",
         "alloy/alloy_blog": "dev-master",
         "alloy/alloy_compact_menu": "dev-master",
@@ -38,6 +39,7 @@
         "drupal/core-recommended": "^9.2",
         "drupal/devel": "^4.1",
         "drupal/devel_kint_extras": "^1.0",
+        "drupal/drulma": "^1.7",
         "drupal/entity_browser": "^2.5",
         "drupal/entity_reference_revisions": "^1.9",
         "drupal/fences": "^2.0@RC",
