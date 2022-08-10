@@ -15,7 +15,7 @@
     ],
     "require": {
         "alloy/adamantine": "^1.0",
-        "alloy/alloy_assemblies": "2.1.1",
+        "alloy/alloy_assemblies": "2.1.4",
         "alloy/alloy_blog": "dev-master",
         "alloy/alloy_compact_menu": "dev-master",
         "alloy/alloy_file_browser": "dev-master",
